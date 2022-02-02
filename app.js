@@ -1,7 +1,22 @@
 require("dotenv").config();
 
-let express = require('express'); 
-let app = express();  
+const express = require('express'); 
+const app = express();  
+const sequelize = require ("./db");
+let posts = require('./controllers/postcontroller');
+let User = require('./controllers/usercontroller');
+
+
+
+
+sequelize.sync(); 
+
+
+
+
+
+
+app.use('/posts', posts);
 
 
 
@@ -18,8 +33,8 @@ let app = express();
 
 
 
-app.listen(process.env.PORT, function(){
+app.listen(process.env.PORT, function(req, res){
     console.log("App is listening on a secret port :) .");
 });
 
-console.log(process.env.PORT)
+

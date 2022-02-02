@@ -1,7 +1,7 @@
-module.exports = (Sequelize, DataTypes) = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory') 
+const {Sequelize, DataTypes} = require('sequelize');
+const sequelize = new Sequelize('postgres::memory') 
 
-const User = sequelize.define('user', {
+const User = sequelize.define('GDFusers', {
     username: {
         type: DataTypes.STRING,
         allownull: false, 
@@ -9,7 +9,7 @@ const User = sequelize.define('user', {
     }, 
     email: {
         type: DataTypes.STRING, 
-        allownull: true, 
+        allownull: false, 
         unique: true
     },
 
@@ -17,8 +17,16 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING, 
         allownull: false
     },
-    
 
-    
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        allownull:  false
+    },
+
+    isPhilo:  {
+        type: DataTypes.BOOLEAN,
+        allownull: false
+    },
+ // return User, do i need this?
 })
 
