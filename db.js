@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const {Sequelize} = require('sequelize'); 
 
-const sequelize = new Sequelize('GDFusers', 'postgres', process.env.GDFUSERS, {
+const db = new Sequelize('GDFusers', 'postgres', process.env.GDFUSERS, {
     host: 'localhost',
     dialect: 'postgres'
 
@@ -21,13 +21,8 @@ const sequelize = new Sequelize('GDFusers', 'postgres', process.env.GDFUSERS, {
 // }
 
 
-sequelize.authenticate()
-.then( () => {
-    console.log("You got it boss!");
-}) .catch((err) => {
-    console.error("Unable to connect.", err)
-});
 
 
 
-  module.exports = sequelize; 
+
+  module.exports = db; 

@@ -1,7 +1,7 @@
-const {Sequelize, DataTypes} = require('sequelize');
-const sequelize = new Sequelize('postgres::memory') 
+const {DataTypes} = require('sequelize');
+const db = require('../db')
 
-const User = sequelize.define('GDFusers', {
+const user = db.define('GDFusers', {
     username: {
         type: DataTypes.STRING,
         allownull: false, 
@@ -30,3 +30,4 @@ const User = sequelize.define('GDFusers', {
  // return User, do i need this?
 })
 
+module.exports = user; 
