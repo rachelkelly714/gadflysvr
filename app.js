@@ -40,7 +40,7 @@ app.use('/user', user);
 // ~~ Port ~~ // 
 
 db.authenticate()
-  .then(() => db.sync({force: true})) // => {force: true} to drop tables
+  .then(() => db.sync()) // => {force: true} to drop tables
   .then(() => {
     app.listen(process.env.PORT, () =>
       console.log('[Server:] App is listening on a secret port. :) ')
