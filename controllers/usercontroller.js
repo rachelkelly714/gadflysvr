@@ -12,10 +12,12 @@ router.post("/create", async (req, res) => {
       isPhilo: false,
     };
 
-    user.create(userModel).then(res.send("User/Create endpoint"));
+    user.create(userModel)
+
+      .then(res.send("User/Create endpoint"))
   } catch (err) {
-    console.log("User endpoint crashed", err);
-  }
+    console.log("Create endpoint crashed", err)
+  };
 });
 
 module.exports = router;
