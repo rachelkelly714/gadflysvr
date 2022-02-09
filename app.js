@@ -7,22 +7,22 @@ const express = require('express');
 const cors = require('cors'); 
 const app = express();  
 const db = require ("./db");
-let posts = require('./controllers/postcontroller');
-let user = require('./controllers/usercontroller');
 
 
 
+
+const controllers = require("./controllers");
 
 
 
 
 
 // ~~ Controllers ~~ // 
-
+app.use(require("./middleware/headers"))
 app.use(express.json()); 
 app.use(cors())
-app.use('/posts', posts);
-app.use('/user', user); 
+app.use('/posts', controllers.postcontroller);
+app.use('/user', controllers.usercontroller); 
 
 
 
@@ -47,8 +47,7 @@ db.authenticate()
     );
   })
   .catch((err) => {
-    console.log("[Server: ] Server Crashed");
-    console.error(err);
+    console.log("[Server: ] Server Crashed", err);
   });
 
 
