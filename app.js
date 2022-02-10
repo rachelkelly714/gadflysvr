@@ -7,22 +7,30 @@ const express = require('express');
 const cors = require('cors'); 
 const app = express();  
 const db = require ("./db");
+const user = require ("./controllers/usercontroller.js");
+const posts = require ("./controllers/postcontroller"); 
+const topics = require ("./controllers/topicscontroller.js");
+const admin = require("./controllers/admincontroller"); 
+const philo = require("./controllers/philocontroller")
 
 
 
 
-const controllers = require("./controllers");
+app.use(require("./middleware/headers"))
+app.use(express.json()); 
 
 
+app.use(cors())
 
 
 
 // ~~ Controllers ~~ // 
-app.use(require("./middleware/headers"))
-app.use(express.json()); 
-app.use(cors())
-app.use('/posts', controllers.postcontroller);
-app.use('/user', controllers.usercontroller); 
+app.use('/user', user); 
+app.use('/posts', posts);
+app.use('/topics', topics);
+app.use('/admin', admin);
+app.use('/philo', philo)
+app.use('topics', topics)
 
 
 

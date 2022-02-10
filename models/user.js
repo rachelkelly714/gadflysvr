@@ -1,7 +1,13 @@
 const {DataTypes} = require('sequelize');
-const db = require('../db')
+const db = require('../db');
+
 
 const user = db.define('GDFusers', {
+  id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+  },
     username: {
         type: DataTypes.STRING,
         allownull: false, 
@@ -27,7 +33,14 @@ const user = db.define('GDFusers', {
         type: DataTypes.BOOLEAN,
         allownull: false
     },
- // return User, do i need this?
+
+  
 })
+
+
+
+
+
+
 
 module.exports = user; 

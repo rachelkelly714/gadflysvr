@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const {Sequelize} = require('sequelize'); 
 
-const db = new Sequelize('GDFusers', 'postgres', process.env.GDFUSERS, {
+const db = new Sequelize('Gadfly', 'postgres', process.env.GDSV, {
     host: 'localhost',
     dialect: 'postgres'
 
