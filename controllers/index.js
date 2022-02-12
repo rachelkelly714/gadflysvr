@@ -1,9 +1,9 @@
 module.exports = {
 
-    usercontroller: require('./usercontroller'), 
-    philocontroller: require('./philocontroller'), 
-    postcontroller: require('./postcontroller'), 
-    topicscontroller: require('./topicscontroller'), 
-    admincontroller: require('./admincontroller'),
-    commentscontroller: require('./commentscontroller')
+    user: require('./usercontroller'), 
+    philo: require('./philocontroller'), 
+    posts: require('./postcontroller'), 
+    topics: require('./topicscontroller'), 
+    admin: require('./admincontroller'),
+    comments: require('./commentscontroller')
 }; 
