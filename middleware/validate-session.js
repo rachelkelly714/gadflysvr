@@ -5,7 +5,7 @@ const validateSession = (req, res, next) => {
  
   const token = req.headers.authorization;
   
-  jwt.verify(token, 'secret', (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     console.log("token: ", token);
     console.log("decoded: ", decoded);
     if (!err && decoded) {

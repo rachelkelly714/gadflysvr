@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const {PhiloModel}  = require("../models/philo");
+const {Philo}  = require("../models/philo");
 
 const philovalidateJWT = async (req, res, next) => {
   if (req.method == "OPTIONS") {
@@ -17,9 +17,9 @@ const philovalidateJWT = async (req, res, next) => {
           process.env.JWT_SECRET
         )
       : undefined;
-    console.log("UserModel Console Log: ",PhiloModel);
+    console.log("Philo Console Log: ", Philo);
     if (payload) {
-      let foundPhilo = await PhiloModel.findOne({
+      let foundPhilo = await Philo.findOne({
         where: {
           id: payload.id
         },
