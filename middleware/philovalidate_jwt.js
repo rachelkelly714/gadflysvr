@@ -1,8 +1,7 @@
-require('dotenv')
 const jwt = require("jsonwebtoken");
-const  user  = require("../models");
+const {PhiloModel}  = require("../models/philo");
 
-const validateJWT = async (req, res, next) => {
+const philovalidateJWT = async (req, res, next) => {
   if (req.method == "OPTIONS") {
     next();
   } else if (
@@ -10,8 +9,6 @@ const validateJWT = async (req, res, next) => {
     req.headers.authorization.includes("Bearer")
   ) {
     const { authorization } = req.headers;
-    console.log("authorization -->", authorization);
-
     const payload = authorization
       ? jwt.verify(
           authorization.includes("Bearer")
@@ -20,18 +17,16 @@ const validateJWT = async (req, res, next) => {
           process.env.JWT_SECRET
         )
       : undefined;
-    console.log("payload -->", payload);
-
+    console.log("UserModel Console Log: ",PhiloModel);
     if (payload) {
-      const foundUser = await user.findOne({
+      let foundPhilo = await PhiloModel.findOne({
         where: {
-          id: payload.id,
+          id: payload.id
         },
       });
-      console.log("foundUser -->", foundUser);
 
-      if (foundUser) {
-        req.user = foundUser;
+      if (foundPhilo) {
+        req.philo = foundPhilo;
         next();
       } else {
         res.status(400).send({
@@ -39,11 +34,15 @@ const validateJWT = async (req, res, next) => {
         });
       }
     } else {
-      res.status(401).send({ message: "Invalid Token " });
+      res.status(401).send({
+        message: "Invalid token",
+      });
     }
   } else {
-    res.status(403).send({ message: "Forbidden" });
+    res.status(403).send({
+      message: "Forbidden",
+    });
   }
 };
 
-module.exports = validateJWT;
+module.exports = philovalidateJWT;

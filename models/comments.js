@@ -3,16 +3,14 @@ const db = require('../db');
 
 
 
-const Posts = db.define('GDFposts', {
+const Comments = db.define('GDFcomments', {
 
     textBox: {
-        type: DataTypes.STRING, 
+        type: DataTypes.TEXT, 
     }, 
 
     userId: {
-        type: DataTypes.UUID, 
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: false 
+        type: DataTypes.STRING,
     }, 
 
     date: {
@@ -28,6 +26,4 @@ const Posts = db.define('GDFposts', {
 })
 
 
-
-
-module.exports = Posts;
+module.exports = Comments; 

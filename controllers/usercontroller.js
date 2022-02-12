@@ -5,6 +5,7 @@ const router = express.Router();
 const user = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const validateJWT = require("../middleware/validate_jwt")
 
 
 
@@ -13,13 +14,14 @@ const jwt = require("jsonwebtoken");
 // ~~** Register **~~ //
 //***************** //
 
-router.post("/register", (req, res) => {
+router.post("/register", validateJWT,  (req, res) => {
   const userObj = {
     username: req.body.user.username,
     password: bcrypt.hashSync(req.body.user.password, 12),
+    email: req.body.user.email
   };
 
-  User.create(userObj)
+  user.create(userObj)
     .then((created) => {
       const token = jwt.sign({ id: created.id }, process.env.JWT_SECRET, {
         expiresIn: "15d"
@@ -43,7 +45,7 @@ router.post("/register", (req, res) => {
 // ~~** Login **~~ //
 //****************//
 
-router.post("/login", async (req, res) => {
+router.post("/login", validateJWT, async (req, res) => {
   try {
     const found = await user.findOne({
       where: {

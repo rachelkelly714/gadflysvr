@@ -4,5 +4,6 @@ module.exports = {
     philocontroller: require('./philocontroller'), 
     postcontroller: require('./postcontroller'), 
     topicscontroller: require('./topicscontroller'), 
-    admincontroller: require('./admincontroller')
+    admincontroller: require('./admincontroller'),
+    commentscontroller: require('./commentscontroller')
 }; 

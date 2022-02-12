@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 const db = require('../db');
 
 
-const user = db.define('GDFusers', {
+const User = db.define('GDFusers', {
   id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -24,15 +24,15 @@ const user = db.define('GDFusers', {
         allownull: false
     },
 
-    isAdmin: {
-        type: DataTypes.BOOLEAN,
-        allownull:  false
-    },
+    // isAdmin: {
+    //     type: DataTypes.BOOLEAN,
+    //     allownull:  true
+    // },
 
-    isPhilo:  {
-        type: DataTypes.BOOLEAN,
-        allownull: false
-    },
+    // isPhilo:  {
+    //     type: DataTypes.BOOLEAN,
+    //     allownull: false
+    // },
 
   
 })
@@ -43,4 +43,4 @@ const user = db.define('GDFusers', {
 
 
 
-module.exports = user; 
+module.exports = User; 
