@@ -1,20 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const { Posts } = require("../models/posts");
+const validateJWT = require("../middleware/validate_jwt");
+const {Admin} = require ("../models/admin")
+
 
 
 
 
 // ~~** Make a post **~~ //
 
-router.post("/create",  async (req, res) => {
+router.post("/create", validateJWT,  async (req, res) => {
   try {
-    let { textBox, userId, date, headline } = req.body.posts;
+    let { textBox, postId, date,  headline, author, } = req.body.posts;
     await Posts.create({
       textBox,
-      userId,
+      postId,
       date,
       headline,
+      author,
       userId: req.user.id,
     });
 
@@ -58,9 +62,10 @@ router.get ("/allposts", async(req, res) => {
             return {
               
                 textBox: a.textBox,
-                userId: a.userId,
+                postId: a.postId,
                 date: a.date,
                 headline: a.headline,
+                author: a.author,
             };
         });
         res.status(200).json({
@@ -113,6 +118,7 @@ try {
       userId,
       date,
       headline,
+      author,
     } = req.body.posts;
 
     let query = {
@@ -122,9 +128,10 @@ try {
     };
     let updatedPosts = {
       textBox,
-      userId,
+      postId,
       date,
       headline,
+      author, 
     } = req.body.posts 
 
     let postsUpdated = await Posts.update(updatedPosts, query);

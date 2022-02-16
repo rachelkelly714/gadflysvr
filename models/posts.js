@@ -9,10 +9,10 @@ const Posts = db.define('GDFposts', {
         type: DataTypes.STRING, 
     }, 
 
-    userId: {
+    postId: {
         type: DataTypes.UUID, 
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: false 
+        primaryKey: true
     }, 
 
     date: {
@@ -22,6 +22,10 @@ const Posts = db.define('GDFposts', {
     headline: {
         type: DataTypes.STRING
 
+    },
+
+    author: { 
+        type: DataTypes.STRING
     }
 
 

@@ -16,6 +16,7 @@ router.post("/register", validateJWT, (req, res) => {
     username: req.body.user.username,
     password: bcrypt.hashSync(req.body.user.password, 12),
     email: req.body.user.email,
+   role: req.body.user.role
   };
 
   user

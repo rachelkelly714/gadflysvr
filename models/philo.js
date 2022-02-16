@@ -25,13 +25,21 @@ const Philo = db.define('GDFphilo', {
   
     //   isAdmin: {
     //       type: DataTypes.BOOLEAN,
+    //       defaultValue: false, 
     //       allownull: true
     //   },
   
     //   isPhilo:  {
     //       type: DataTypes.BOOLEAN,
+    //       dafaultValue: true, 
     //       allownull: true
     //   },
+
+    role: {
+        type: DataTypes.STRING,
+        enum: ['glaucon', 'socrates', 'aristotle'],
+        defaultValue: 'aristotle'
+    }
 
 
 })

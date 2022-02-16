@@ -19,7 +19,8 @@ router.post("/register", philovalidateJWT, (req, res) => {
   const philoObj = {
     username: req.body.philo.username,
     password: bcrypt.hashSync(req.body.philo.password, 12),
-    email: req.body.philo.email
+    email: req.body.philo.email,
+    role: req.body.philo.role
   };
 
   philo.create(philoObj)

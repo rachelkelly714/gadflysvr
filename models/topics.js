@@ -7,6 +7,11 @@ const Topics = db.define('GDFtopics', {
 
      topicBox: {
          type: DataTypes.STRING
+     },
+
+     topicsId: {
+         type: DataTypes.STRING, 
+         primaryKey: true
      }
 
 

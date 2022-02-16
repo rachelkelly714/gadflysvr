@@ -9,18 +9,22 @@ const Comments = db.define('GDFcomments', {
         type: DataTypes.TEXT, 
     }, 
 
-    userId: {
+    author: { 
+        type: DataTypes.STRING, 
+    },
+
+    commentId: {
         type: DataTypes.STRING,
+        primaryKey: true
     }, 
+
+
 
     date: {
         type: DataTypes.DATE,
     },
 
-    headline: {
-        type: DataTypes.STRING
-
-    }
+   
 
 
 })

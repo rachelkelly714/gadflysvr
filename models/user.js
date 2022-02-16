@@ -24,16 +24,11 @@ const User = db.define('GDFusers', {
         allownull: false
     },
 
-    // isAdmin: {
-    //     type: DataTypes.BOOLEAN,
-    //     allownull:  true
-    // },
-
-    // isPhilo:  {
-    //     type: DataTypes.BOOLEAN,
-    //     allownull: false
-    // },
-
+    role: {
+        type: DataTypes.STRING, 
+        enum: ['glaucon', "socrates", 'aristotle'], 
+        defaultValue: "glaucon"
+    }
   
 })
 

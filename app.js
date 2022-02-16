@@ -8,6 +8,7 @@ const app = express();
 const db = require("./db");
 const controllers = require("./controllers");
 const { user, philo, posts, topics, admin, comments } = controllers;
+const {adminCreate} = require('./middleware/roleAuth')
 
 app.use(require("./middleware/headers"));
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use("/topics", topics);
 app.use("/admin", admin);
 app.use("/philo", philo);
 app.use("/topics", topics);
+app.use("/comments", comments);
 
 // ~~ Port ~~ //
 

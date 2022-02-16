@@ -1,15 +1,18 @@
 let express = require('express');
 let router = express.Router(); 
 const { Topics } = require("../models/topics");
+const validateJWT = require("../middleware/validate_jwt");
 
-router.post('/create', async (req, res) => {
+
+router.post('/create', validateJWT,  async (req, res) => {
     try {
         let {
-            topicBox
+            topicBox, topicIds 
         } = req.body.topic
 
         await Topics.create({
             topicBox,
+            topicIds,
             userId: req.user.id
         })
         
@@ -48,7 +51,8 @@ router.get("/alltopics", async (req, res) => {
         const Topic = await Topics.findAll();
         const TopicRet = Topic.map((a) => {
             return {
-                topicBox: a.topicBox
+                topicBox: a.topicBox,
+                topicsId: a.topicsId
             };
         });
         res.status(200).json({
@@ -99,7 +103,8 @@ router.put('/update/:id', async(req, res) => {
     try {
         let TopicsID = req.params.id; 
         let {
-            topicBox
+            topicBox,
+            topicsId
         } = req.body.topics;
 
         let query = {
@@ -110,6 +115,7 @@ router.put('/update/:id', async(req, res) => {
 
         let updatedTopic = {
             topicBox,
+            topicId
         } = req.body.topics
 
      let topicUpdated = await Topics.update(updatedTopic, query);
