@@ -26,7 +26,7 @@ const User = db.define('GDFusers', {
 
     role: {
         type: DataTypes.STRING, 
-        enum: ['glaucon', "socrates", 'aristotle'], 
+        enum: ['glaucon', 'socrates', 'aristotle'], 
         defaultValue: "glaucon"
     }
   

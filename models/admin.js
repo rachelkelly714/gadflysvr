@@ -9,24 +9,21 @@ const Admin = db.define('GDFphilo', {
     },
       username: {
           type: DataTypes.STRING,
+          defaultValue: 'Socrates'
      
       
       }, 
       email: {
           type: DataTypes.STRING, 
-          unique: true
+          unique: true, 
+          defaultValue: process.env.ADMINPSW
       },
   
-    //   password: {
-    //       type: DataTypes.STRING, 
-    //       allownull: false
-    //   },
-  
-    //   isAdmin: {
-    //       type: DataTypes.BOOLEAN,
-    //       defaultValue: true, 
-      
-    //   },
+    password: {
+        type: DataTypes.STRING, 
+        allowNull: false, 
+        defaultValue: process.env.ADMINEML
+    },
 
 
     role: {

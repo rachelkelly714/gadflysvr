@@ -22,18 +22,7 @@ const Philo = db.define('GDFphilo', {
           type: DataTypes.STRING, 
           allownull: false
       },
-  
-    //   isAdmin: {
-    //       type: DataTypes.BOOLEAN,
-    //       defaultValue: false, 
-    //       allownull: true
-    //   },
-  
-    //   isPhilo:  {
-    //       type: DataTypes.BOOLEAN,
-    //       dafaultValue: true, 
-    //       allownull: true
-    //   },
+
 
     role: {
         type: DataTypes.STRING,

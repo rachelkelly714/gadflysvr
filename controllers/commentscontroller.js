@@ -42,7 +42,8 @@ router.post("/create", validateJWT,  async (req, res) => {
           Comments.findAll({
               where: {
                   userId: req.user.id, 
-                  userId: req.philo.id
+                  userId: req.philo.id,
+                  userId: req.admin.id
               }
           }) .then((post) => {
               res.status(200).json(post)
@@ -57,11 +58,10 @@ router.post("/create", validateJWT,  async (req, res) => {
           // ~~** Find All Posts **~~ // 
   
   
-  router.get ("/allposts", async(req, res) => {
+  router.get ("/allposts", validateJWT, async(req, res) => {
+      if(req.user.role = 'Socrates' || 'Aristotle')
+
       try{
-
-         
-
 
           const Comment = await Comments.findAll();
           const CommentRet = Comments.map((a) => {
@@ -79,17 +79,24 @@ router.post("/create", validateJWT,  async (req, res) => {
           res.status(200).json({
               Comment:Comment,
               message: "Found It!"
-          });
-      } catch(error) {
+          }) 
+
+
+      } 
+      
+      
+      catch(error) {
           res.status(500).json({
               message: 'Comment not found.'
           });
-      }
+
+      } else {res.status(401).json({ Message: "Access Denied", err})}
   });
   
   // ~~** Delete Comments - User **~~ //
   
-  router.delete("/:id", async (req, res) => {
+  router.delete("/:id", validateJWT, async (req, res) => {
+
    const CommentID = req.params.id; 
    const userId = req.user.id; 
    try {
@@ -113,12 +120,12 @@ router.post("/create", validateJWT,  async (req, res) => {
      }
    } catch (error){
        res.status(500).json({
-           message: "Error: Denied."
+           message: "Error: ISE."
        });
    }
   });
   
-  router.put("/update/:id", async(req, res) => {
+  router.put("/update/:id", validateJWT, async(req, res) => {
   try {
       let CommentsID = req.params.id; 
       let{
@@ -149,7 +156,7 @@ router.post("/create", validateJWT,  async (req, res) => {
   
   }catch(error) {
       res.status(500).json({
-          message: 'Error: ISE'
+          Message: 'Error: ISE'
       });
   }
   });

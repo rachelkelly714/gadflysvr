@@ -8,6 +8,35 @@ const {Admin} = require('../models/admin')
 
 
 
+router.post("/register", validateJWT, (req, res) => {
+  const admObj = {
+    username: req.body.admin.username,
+    password: bcrypt.hashSync(req.body.admin.password, 12),
+    email: req.body.admin.email,
+    role: req.body.admin.role
+  };
+
+  admin.create(admObj)
+    .then((created) => {
+      const token = jwt.sign({ id: created.id }, process.env.JWT_SECRET, {
+        expiresIn: "200d"
+      });
+      res.status(200).json({
+        Admin: created,
+        Message: "Admin Registered!",
+        SessionToken: token,
+      });
+    })
+
+    .catch((err) => {
+      res.status(500).json({Message: "500 ISE", err});
+    });
+});
+
+
+
+
+
 
 
 
