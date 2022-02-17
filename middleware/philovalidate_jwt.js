@@ -18,7 +18,7 @@ const philovalidateJWT = async (req, res, next) => {
         )
       : undefined;
     console.log("Philo Console Log: ", Philo);
-    if (payload) {
+    if (payload && role === 'Aristotle') {
       let foundPhilo = await Philo.findOne({
         where: {
           id: payload.id

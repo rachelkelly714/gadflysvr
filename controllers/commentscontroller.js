@@ -21,6 +21,7 @@ router.post("/create", validateJWT,  async (req, res) => {
         author,
         commentId,
         date,
+        philoId: req.philo.id,
         userId: req.user.id,
       });
   

@@ -19,6 +19,7 @@ router.post("/create", validateJWT,  async (req, res) => {
       date,
       headline,
       author,
+      philoId: req.philo.id,
       userId: req.user.id,
     });
 
@@ -40,7 +41,7 @@ router.get('/my', async (req,res) => {
         Posts.findAll({
             where: {
                 userId: req.user.id, 
-                userId: req.philo.id
+                philoId: req.philo.id
             }
         }) .then((post) => {
             res.status(200).json(post)
@@ -56,6 +57,7 @@ router.get('/my', async (req,res) => {
 
 
 router.get ("/allposts", async(req, res) => {
+    if(req.user.role === 'Socrates' || 'Aristotle')
     try{
         const Post = await Posts.findAll();
         const PostRet = Post.map((a) => {
@@ -76,7 +78,7 @@ router.get ("/allposts", async(req, res) => {
         res.status(500).json({
             message: 'Posts not found.'
         });
-    }
+    } else {res.status(401).json({ Message: "Access Denied", err})}
 });
 
 // ~~** Delete Posts - User **~~ //
@@ -84,10 +86,11 @@ router.get ("/allposts", async(req, res) => {
 router.delete("/:id", async (req, res) => {
  const PostID = req.params.id; 
  const userId = req.user.id; 
+ const philoId = req.user.id; 
  try {
    const query = {
 
-   where: {id: PostID, userId},
+   where: {id: PostID, userId, philoId},
 
    };
 
@@ -115,7 +118,7 @@ try {
     let PostsID = req.params.id; 
     let{
       textBox,
-      userId,
+      postId,
       date,
       headline,
       author,
