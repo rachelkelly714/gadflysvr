@@ -19,7 +19,7 @@ const Posts = db.define('GDFposts', {
         type: DataTypes.DATE,
     },
 
-    headline: {
+    topicTitle: {
         type: DataTypes.STRING
 
     },

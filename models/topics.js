@@ -6,7 +6,8 @@ const db = require('../db');
 const Topics = db.define('GDFtopics', {
 
      topicBox: {
-         type: DataTypes.STRING
+         type: DataTypes.STRING,
+         unique: true
      },
 
      topicsId: {

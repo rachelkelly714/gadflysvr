@@ -2,13 +2,13 @@ let express = require('express');
 let router = express.Router(); 
 const {User} = require('../models/user'); 
 const {Philo} = require('../models/philo');
-const validateJWT = require('../middleware/validate_jwt')
+const validateJWT = require("../middleware/validate-session")
 const {Admin} = require('../models/admin')
 
 
 
 
-router.post("/register", validateJWT, (req, res) => {
+router.post("/register",  (req, res) => {
   const admObj = {
     username: req.body.admin.username,
     password: bcrypt.hashSync(req.body.admin.password, 12),

@@ -1,10 +1,10 @@
 let express = require('express');
 let router = express.Router(); 
 const { Topics } = require("../models/topics");
-const validateJWT = require("../middleware/validate_jwt");
+const validateJWT = require("../middleware/validate-session")
 
 
-router.post('/create', validateJWT,  async (req, res) => {
+router.post('/create',   async (req, res) => {
     try {
         let {
             topicBox, topicIds 

@@ -1,7 +1,7 @@
 const db = require('../db'); 
-const User = require('./user');
+const user = require('./user');
 const Philo = require('./philo');
-const Posts = require('./posts');
+const Post = require('./posts');
 const Topics = require('./topics');
 const Comments = require('./comments')
 
@@ -10,21 +10,23 @@ const Comments = require('./comments')
 
 // ~~** DB Associations **~~ // 
 
-User.hasMany(Posts)
-User.hasMany(Topics)
-User.hasMany(Comments) 
+user.hasMany(Post)
+user.hasMany(Topics)
+user.hasMany(Comments) 
 
-Philo.hasmany(Posts)
-Philo.hasmany(Topics)
+// Philo.hasmany(Posts)
+// Philo.hasmany(Topics)
 Philo.hasMany(Comments)
 
-Posts.belongsTo(User)
-Posts.belongsTo(Philo)
+Post.belongsTo(user)
+Post.belongsTo(Philo)
+Post.hasMany(Comments)
 
-Comments.belongsTo(User)
+Comments.belongsTo(user)
 Comments.belongsTo(Philo)
+Comments.belongsTo(Post)
 
 
 module.exports= {
-    User, Philo, Posts, Comments,
-}
+ user, Philo, Post, Comments
+};

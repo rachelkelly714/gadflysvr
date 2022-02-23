@@ -15,7 +15,7 @@ const Comments = db.define('GDFcomments', {
 
     commentId: {
         type: DataTypes.STRING,
-        primaryKey: true
+      
     }, 
 
 

@@ -1,28 +1,49 @@
 const jwt = require("jsonwebtoken");
-const db = require('../db')
-const User = require("../models/user");
+const { models } = require("../models");
 
-const validateSession = (req, res, next) => {
- 
-  const token = req.headers.authorization;
+const validateJWT = async (req, res, next) => {
+  if (req.method == "OPTIONS") {
+    next();
+  } else if (
+    req.headers.authorization &&
+    req.headers.authorization.includes("Bearer")
+  ) {
+    const { authorization } = req.headers;
+    const payload = authorization
+      ? jwt.verify(
+          authorization.includes("Bearer")
+            ? authorization.split(" ")[1]
+            : authorization,
+          process.env.JWT_SECRET
+        )
+      : undefined;
+
+    if (payload) {
+      console.log(payload);
+      let founduser = await models.user.findOne({
+        where: {
+          id: payload.id,
+        },
+      });
   
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    console.log("token: ", token);
-    console.log("decoded: ", decoded);
-    if (!err && decoded) {
-      User.findOne({ where: { id: decoded.id } })
-        .then((user) => {
-          console.log("user: ", user);
-          if (!user) throw "err";
-          req.user = user;
-          return next();
-          
-        })
-        .catch((err) => next(err));
+      if (founduser) {
+        req.user = founduser;
+        next();
+      } else {
+        res.status(400).send({
+          message: "Not Authorized",
+        });
+      }
     } else {
-      req.errors = err;
-      return res.status(500).send("Not Authorized");
+      res.status(401).send({
+        message: "Invalid token",
+      });
     }
-  });
+  } else {
+    res.status(403).send({
+      message: "Forbidden",
+    });
+  }
 };
-module.exports = validateSession;
+
+module.exports = validateJWT;

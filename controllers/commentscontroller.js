@@ -5,7 +5,7 @@ const router = express.Router();
 const {Comments} = require("../models/comments");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const validateJWT = require("../middleware/validate_jwt");
+const validateJWT = require("../middleware/validate-session")
 const {Admin} = require("../models/admin");
 
 
@@ -13,7 +13,7 @@ const {Admin} = require("../models/admin");
 
 // ~~** Post a comment **~~ //
 
-router.post("/create", validateJWT,  async (req, res) => {
+router.post("/create",  async (req, res) => {
     try {
       let { textBox, author, commentId, date,} = req.body.posts;
       await Comments.create({

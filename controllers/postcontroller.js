@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Posts } = require("../models/posts");
-const validateJWT = require("../middleware/validate_jwt");
+const validateJWT = require("../middleware/validate-session")
 const {Admin} = require ("../models/admin")
 
 
@@ -10,14 +10,14 @@ const {Admin} = require ("../models/admin")
 
 // ~~** Make a post **~~ //
 
-router.post("/create", validateJWT,  async (req, res) => {
+router.post("/create",   async (req, res) => {
   try {
     let { textBox, postId, date,  headline, author, } = req.body.posts;
     await Posts.create({
       textBox,
       postId,
       date,
-      headline,
+      topicTitle,
       author,
       philoId: req.philo.id,
       userId: req.user.id,
@@ -66,7 +66,7 @@ router.get ("/allposts", async(req, res) => {
                 textBox: a.textBox,
                 postId: a.postId,
                 date: a.date,
-                headline: a.headline,
+                topicTitle: a.topicTitle,
                 author: a.author,
             };
         });
@@ -120,7 +120,7 @@ try {
       textBox,
       postId,
       date,
-      headline,
+      topicTitle,
       author,
     } = req.body.posts;
 
@@ -133,7 +133,7 @@ try {
       textBox,
       postId,
       date,
-      headline,
+      topicTitle,
       author, 
     } = req.body.posts 
 
